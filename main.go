@@ -88,15 +88,16 @@ func main() {
 		}
 	}
 
-	printf := func(tmpl string, args ...any) { fmt.Println(fmt.Sprintf(tmpl, args...)) }
+	println := func(s ...any) { fmt.Println(s...) }
+	printf := func(tmpl string, args ...any) { println(fmt.Sprintf(tmpl, args...)) }
 
-	fmt.Println()
+	println()
 	printf("%d with NO matches", len(none))
 	for _, m := range none {
 		printf("  %s", m.binary.Name())
 	}
 
-	fmt.Println()
+	println()
 	printf("%d with ONE match", len(one))
 	for _, m := range one {
 		printf("  %s -> %s", m.binary.Name(), m.pkgs[0])
@@ -107,11 +108,11 @@ func main() {
 			onePkgs = append(onePkgs, m.pkgs[0])
 		}
 		cmd := fmt.Sprintf("go install %s", strings.Join(onePkgs, " "))
-		fmt.Println()
+		println()
 		printf("  INSTALL: %s", cmd)
 	}
 
-	fmt.Println()
+	println()
 	printf("%d with MULTIPLE matches", len(some))
 	for _, m := range some {
 		printf("  %s -> %v", m.binary.Name(), m.pkgs)
