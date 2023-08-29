@@ -42,13 +42,11 @@ func main() {
 	binDir := goDir("bin")
 	pkgDir := goDir("pkg", "mod")
 
-	// Get list of binaries
 	binaries, err := os.ReadDir(binDir)
 	if err != nil {
 		log.Fatalf("Failed to read bin directory: %v", err)
 	}
 
-	// Get list of package directories (recursively)
 	var packages []string
 	err = filepath.Walk(pkgDir, func(path string, info fs.FileInfo, err error) error {
 		if err != nil {
